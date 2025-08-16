@@ -2,7 +2,7 @@ from typing import Any
 import m_heap
 
 
-class Min_Heap:
+class Max_Heap:
     def __init__(self):
         self.heap: list[Any] = []
 
@@ -17,13 +17,13 @@ class Min_Heap:
         while i > 0:
             parent: int = m_heap.parent(i)
 
-            if self.heap[i] >= self.heap[parent]:
+            if self.heap[i] < self.heap[parent]:
                 break
 
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
             i = parent
 
-    def extract_min(self) -> Any | None:
+    def extract_max(self) -> Any | None:
         if not self.heap:
             return None
 
@@ -33,25 +33,24 @@ class Min_Heap:
         root: Any = self.heap[0]
         self.heap[0] = self.heap.pop()
         self.heapify_down(0)
-
         return root
 
     def heapify_down(self, i: int) -> None:
-        smallest: int = i
+        largest: int = i
         left: int = m_heap.left(i)
         right: int = m_heap.right(i)
 
-        if left < len(self.heap) and self.heap[left] < self.heap[smallest]:
-            smallest = left
-        if right < len(self.heap) and self.heap[right] < self.heap[smallest]:
-            smallest = right
+        heap_len: int = len(self.heap)
 
-        if smallest != i:
-            temp: Any = self.heap[i]
-            self.heap[i] = self.heap[smallest]
-            self.heap[smallest] = temp
-            self.heapify_down(smallest)
+        if left < heap_len and self.heap[left] > self.heap[largest]:
+            largest = left
+        if right < heap_len and self.heap[right] > self.heap[largest]:
+            largest = right
+
+        if largest != i:
+            self.heap[i], self.heap[largest] = self.heap[largest], self.heap[i]
+            self.heapify_down(largest)
 
 
 if __name__ == "__main__":
-    print("Min Heap Implementation")
+    print("Max Heap Implementation")

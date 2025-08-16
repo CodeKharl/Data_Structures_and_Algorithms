@@ -49,3 +49,7 @@ class Hash_Table(Generic[K, V]):
 
     def size(self) -> int:
         return sum(len(bucket) for bucket in self.table)
+
+
+if __name__ == "__main__":
+    print("Hash Table Implementation")
