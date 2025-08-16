@@ -12,7 +12,7 @@ class Hash_Table(Generic[K, V]):
     def __repr__(self):
         temp_str: str = str()
 
-        for i, bucket in enumerate(self.table):
+        for bucket in self.table:
             temp_str += str(bucket)
 
         return temp_str
