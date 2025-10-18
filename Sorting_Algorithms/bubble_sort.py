@@ -1,31 +1,18 @@
-from typing import Callable
+from .sort import Sort
 
 
-def bubble_sort(arr: list[int], comparable: Callable[[list[int], int], bool]) -> None:
-    arr_len: int = len(arr)
+class BubbleSort(Sort):
+    def sort(self, arr: list[int]) -> None:
+        arr_len: int = len(arr)
+        flag: bool = True
 
-    for i in range(arr_len):
-        swapped: bool = False
+        while flag:
+            flag = False
 
-        for j in range(1, arr_len - i):
-            if comparable(arr, j):
-                arr[j], arr[j - 1] = arr[j - 1], arr[j]
-                swapped = True
+            for i in range(1, arr_len):
+                if arr[i] < arr[i - 1]:
+                    arr[i], arr[i - 1] = arr[i - 1], arr[i]
+                    flag = True
 
-        if not swapped:
-            break
-
-
-def increment(arr: list[int], j: int) -> bool:
-    return arr[j] < arr[j - 1]
-
-
-def main():
-    arr: list[int] = [7, 8, 3, 5, 1]
-    bubble_sort(arr, increment)
-
-    print(arr)
-
-
-if __name__ == "__main__":
-    main()
+    def __str__(self) -> str:
+        return "Bubble Sort"
