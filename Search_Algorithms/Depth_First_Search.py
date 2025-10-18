@@ -1,8 +1,6 @@
 # Recursive DFS Implementation
 def dfs_recursive(
-        graph: dict[str, list[str]],
-        start: str,
-        visited: set[str] | None = None
+    graph: dict[str, list[str]], start: str, visited: set[str] | None = None
 ) -> None:
     if not visited:
         visited = set()
@@ -30,17 +28,17 @@ def dfs_iterate(graph: dict[str, list[str]], start: str) -> None:
             stack.extend(reversed(graph[node]))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     graph: dict[str, list[str]] = {
         "A": ["B", "C"],
         "B": ["A", "D", "E"],
         "C": ["A", "F"],
         "D": ["B"],
         "E": ["B", "F"],
-        "F": ["C", "E"]
+        "F": ["C", "E"],
     }
 
-    start: str = 'A'
+    start: str = "A"
     dfs_recursive(graph, start)
     print(" ")
     dfs_iterate(graph, start)
